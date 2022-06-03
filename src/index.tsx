@@ -1,16 +1,10 @@
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import React from "react";
+import ReactDOM from "react-dom";
 import App from "./App";
-import Focus from "./Focus";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/focus" element={<Focus />} />
-    </Routes>
-  </BrowserRouter>
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
 );
