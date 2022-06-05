@@ -5,13 +5,10 @@ import {
   ChangeEventHandler
 } from "react";
 
-import { Task } from "../Types";
+import { Task, TasksProps } from "../Types";
 import { nanoid } from "nanoid";
 
-type Props = {
-  tasks: Task[];
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
-};
+type Props = TasksProps & {};
 
 const ListScreen: React.FC<Props> = ({ tasks, setTasks }) => {
   const [newTaskLabel, setNewTaskLabel] = useState("");

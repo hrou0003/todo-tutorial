@@ -9,9 +9,7 @@ export default function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const tasksProps = { tasks, setTasks };
 
-  let activeStyle = {
-    fontWeight: "bold"
-  };
+
 
   return (
     <div className="App">
@@ -19,13 +17,19 @@ export default function App() {
         <nav>
           <NavLink
             to="/"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}>
-            List
+            style={({ isActive }) => 
+              isActive ? {fontWeight: "bold"} : {}
+          }
+          >
+            Link
           </NavLink>
           {" - "}
           <NavLink
             to="/focus"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+             style={({ isActive }) => 
+              isActive ? {fontWeight: "bold"} : {}
+          }
+          >
             Focus
           </NavLink>
         </nav>
