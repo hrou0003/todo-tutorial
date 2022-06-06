@@ -1,14 +1,20 @@
-import { Task } from "../Types";
+import { Task, TasksProps } from "../Types";
 
-type Props = {
-  tasks: Task[];
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
-};
+type Props = TasksProps & {}
 
-const FocusScreen: React.FC<Props> = ({ tasks }) => {
-  const task = tasks[0];
+const FocusScreen: React.FC<Props> = ({ focusedTask: task, updateTaskCompletion, shuffleFocusedTask }) => {
 
-  return <div>{task ? task.label : "No tasks"}</div>;
+  const handleMarkCompleted = () => {
+    if (task) updateTaskCompletion(task.id, true);
+  }
+
+  return task ? (<div>
+      <div>{task ? task.label : "No tasks"}</div>
+      <button onClick={handleMarkCompleted}>mark completed</button>
+      <button onClick={shuffleFocusedTask}>nope</button>
+    </div>) : (
+      <div>No incomplete tasks. Yay!</div>
+    )
 };
 
 export default FocusScreen;
