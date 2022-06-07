@@ -1,8 +1,10 @@
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 import styled from "styled-components";
+import IconButton from "../components/IconButton";
 import Spacer from "../components/Spacer";
 import TextButton from "../components/TextButton";
 import useTaskStore from "../hooks/use-task-store";
+import DeleteIcon from "../icons/DeleteIcon";
 import { Task, TasksProps } from "../Types";
 
 const Container = styled.div`
@@ -17,15 +19,34 @@ const List = styled.div`
   background: rgba(255, 255, 255, 0.1);
   border-radius: 15px;
   padding: 45px 24px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Input = styled.input`
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   color: white;
   border-radius: 15px;
   border: none;
   padding: 20px 24px;
-`
+`;
+
+
+const ListItem = styled.label`
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+  color: white;
+  font-size: 18px;
+`;
+
+const DeleteButton = styled(IconButton)`
+  visibility: hidden;
+
+  ${ListItem}:hover & {
+    visibility: visible;
+  }
+`;
 
 type Props = {};
 
@@ -64,13 +85,19 @@ const ListScreen: React.FC<Props> = () => {
       <List>
         {tasks.map((task) => (
           <div key={task.id}>
-            <input
-              type="checkbox"
-              checked={task.isComplete}
-              onChange={handleCompleteChange(task)}
-            />
-            {task.label}
-            <button onClick={handleTaskDeleteClick(task)}>delete</button>
+            <ListItem>
+              <input
+                type="checkbox"
+                checked={task.isComplete}
+                onChange={handleCompleteChange(task)}
+              />
+              <Spacer width={24}/>
+              {task.label}
+              <Spacer flex={1} />
+            <DeleteButton showOnHover onClick={handleTaskDeleteClick(task)}>
+              <DeleteIcon />
+            </DeleteButton>
+            </ListItem>
           </div>
         ))}
       </List>
@@ -79,9 +106,12 @@ const ListScreen: React.FC<Props> = () => {
         value={newTaskLabel}
         onChange={handleNewTaskLabelChange}
         onKeyPress={handleNewTaskKeyPress}
+        placeholder="Add new task"
       />
       <Spacer height={45} />
-      <TextButton onClick={handleClearClick} style={{ alignSelf: 'center' }}>clear completed</TextButton>
+      <TextButton onClick={handleClearClick} style={{ alignSelf: "center" }}>
+        clear completed
+      </TextButton>
     </Container>
   );
 };
