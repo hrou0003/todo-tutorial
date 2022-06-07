@@ -1,5 +1,6 @@
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 import styled from "styled-components";
+import Checkbox from "../components/Checkbox";
 import IconButton from "../components/IconButton";
 import Spacer from "../components/Spacer";
 import TextButton from "../components/TextButton";
@@ -86,11 +87,10 @@ const ListScreen: React.FC<Props> = () => {
         {tasks.map((task) => (
           <div key={task.id}>
             <ListItem>
-              <input
-                type="checkbox"
-                checked={task.isComplete}
+              <Checkbox
+                checked={task.isComplete} 
                 onChange={handleCompleteChange(task)}
-              />
+              /> 
               <Spacer width={24}/>
               {task.label}
               <Spacer flex={1} />
