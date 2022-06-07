@@ -16,6 +16,7 @@ const Layout = styled.div`
   flex-direction: column;
   padding: 35px;
   margin: auto;
+  min-height: 90;
 `
 
 const Nav = styled.nav`
